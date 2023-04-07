@@ -1,20 +1,29 @@
-<script setup>
-import icon from "../../helpers/svgHelper.vue";
+<script setup lang="ts">
 import { ref } from "vue";
+import icon from "../../helpers/svgHelper.vue";
 
-const isVisible = ref(false);
+const props = defineProps({
+    isVisible: {
+        type: Boolean,
+    },
+    icon: {
+        type: String,
+    },
+});
 
-const selectCard = () => {
+const isVisible = ref(props.isVisible);
+
+const flipCard = () => {
     isVisible.value = !isVisible.value;
 };
 </script>
 <template>
-    <div class="card" @click="selectCard()">
+    <div class="card" @click="flipCard">
         <div v-if="!isVisible" class="front-side">
             <h1>?</h1>
         </div>
         <div v-else class="back-side">
-            <icon name="card0" />
+            <icon :name="props.icon" />
         </div>
     </div>
 </template>

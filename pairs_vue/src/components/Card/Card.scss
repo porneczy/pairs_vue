@@ -1,5 +1,35 @@
 @import "../../vars.scss";
 
 .card {
-    border: 5px solid $tertiary-color;
+    cursor: pointer;
+
+    .front-side,
+    .back-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 2px solid $card-front-border-color;
+        border-radius: 10px;
+        box-shadow: 0 5px 0 $card-front-shadow-color;
+
+        font-family: "CeraRoundPro";
+        font-size: 30px;
+
+        background-color: $card-front-bg;
+        color: $card-front-color;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        &:active {
+            box-shadow: 0 0 0;
+            margin: 5px 0 -5px 0;
+        }
+    }
+
+    .back-side {
+        background-color: $card-back-bg;
+        border: 2px solid $card-back-border-color;
+        box-shadow: 0 5px 0 $card-back-shadow-color;
+    }
 }

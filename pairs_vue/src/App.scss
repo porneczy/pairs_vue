@@ -1,0 +1,29 @@
+@import "./vars.scss";
+
+@font-face {
+    font-family: "CeraRoundPro";
+    src: url("./assets/fonts/CeraRoundProRegular.woff") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "CeraRoundPro-Bold";
+    src: url("./assets/fonts/CeraRoundProBold.woff") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "CeraRoundPro-Thin";
+    src: url("./assets/fonts/CeraRoundProThinRegular.woff") format("truetype");
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "CeraRoundPro";
+    color: $secondary-color;
+    background-color: $primary-color;
+}

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import Card from "./components/Card.vue";
+import AppHeader from "./components/AppHeader/AppHeader.vue";
+import Card from "./components/Card/Card.vue";
 </script>
 
 <template>
-    <h1>pairs vue</h1>
+    <AppHeader />
     <div class="game-board-container">
         <Card />
     </div>

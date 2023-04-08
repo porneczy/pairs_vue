@@ -1,29 +1,22 @@
 <script setup lang="ts">
 import AppHeader from "./components/AppHeader/AppHeader.vue";
 import Card from "./components/Card/Card.vue";
-import { usePlayerStore } from "./stores/player";
+import { useCardListStore } from "./stores/player";
 
 interface Card {
     icon: string;
     isVisible: boolean;
-    id: Number;
+    isMatched: boolean;
+    id: number;
 }
 
-const playerData = usePlayerStore();
-
-const NUMBER_OF_CARDS = 8;
-
-const cardList = Array.from({ length: NUMBER_OF_CARDS }, (_, i) => ({
-    icon: `card${i % (NUMBER_OF_CARDS / 2)}`,
-    isVisible: false,
-    id: i % (NUMBER_OF_CARDS / 2),
-}));
+const cardList = useCardListStore();
 
 function shuffleCards(cards: Card[]): Card[] {
     return cards.sort(() => Math.random() - 0.5);
 }
 
-const shuffledCardList = shuffleCards(cardList);
+const shuffledCardList = shuffleCards(cardList.Cards);
 </script>
 
 <template>
@@ -31,9 +24,9 @@ const shuffledCardList = shuffleCards(cardList);
     <div class="game-board-container">
         <Card
             v-for="(card, index) in shuffledCardList"
+            :key="index"
             :isVisible="card.isVisible"
             :icon="card.icon"
-            :key="index"
         />
     </div>
 </template>

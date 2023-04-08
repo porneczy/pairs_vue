@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppHeader from "./components/AppHeader/AppHeader.vue";
 import Card from "./components/Card/Card.vue";
+import { usePlayerStore } from "./stores/player";
 
 interface Card {
     icon: string;
@@ -8,11 +9,13 @@ interface Card {
     id: Number;
 }
 
+const playerData = usePlayerStore();
+
 const NUMBER_OF_CARDS = 8;
 
 const cardList = Array.from({ length: NUMBER_OF_CARDS }, (_, i) => ({
     icon: `card${i % (NUMBER_OF_CARDS / 2)}`,
-    isVisible: true,
+    isVisible: false,
     id: i % (NUMBER_OF_CARDS / 2),
 }));
 

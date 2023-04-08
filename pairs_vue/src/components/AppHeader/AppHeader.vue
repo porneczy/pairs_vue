@@ -1,10 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { usePlayerStore } from "../../stores/player";
+
+const playerData = usePlayerStore();
+</script>
 
 <template>
     <header class="navbar-container">
         <div class="navbar">
             <p>pair vue</p>
-            <p>score: 0</p>
+            <p>score: {{ playerData.player.score }}</p>
             <button>Restart</button>
         </div>
     </header>

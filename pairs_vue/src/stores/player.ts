@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import type { CardListStore, PlayerStore } from "../types/types";
 
 const NUMBER_OF_CARDS = 8;
 let idCounter = 0;
@@ -10,11 +11,14 @@ const cardList = Array.from({ length: NUMBER_OF_CARDS }, (_, i) => ({
 }));
 
 export const usePlayerStore = defineStore("player", {
-    state: () => ({ player: {
-        score: 0,
-        selectedCards: []
-    } }),
+    state: (): PlayerStore => ({
+        player: {
+            score: 0,
+            selectedCards: [],
+        },
+    }),
 });
+
 export const useCardListStore = defineStore("CardList", {
-    state: () => ({ Cards: cardList }),
+    state: (): CardListStore => ({ Cards: cardList }),
 });

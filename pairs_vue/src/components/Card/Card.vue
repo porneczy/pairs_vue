@@ -3,9 +3,6 @@ import icon from "../../helpers/svgHelper.vue";
 import { useCardListStore, usePlayerStore } from "../../stores/player";
 
 const props = defineProps({
-    isVisible: {
-        type: Boolean,
-    },
     icon: {
         type: String,
     },
@@ -22,15 +19,14 @@ const flipCard = () => {
     const { player } = playerData;
     const { id, icon } = props;
     const { selectedCards, score } = player;
-    const card = cardList.Cards[id];
-    console.log(cardList.Cards);
+    const actualCard = cardList.Cards[id];
 
     if (selectedCards.length === 0) {
         selectedCards.push({ id, icon });
-        card.isVisible = !card.isVisible;
+        actualCard.isVisible = !actualCard.isVisible;
     } else if (selectedCards.length === 1) {
         selectedCards.push({ id, icon });
-        card.isVisible = !card.isVisible;
+        actualCard.isVisible = !actualCard.isVisible;
 
         // Ellenőrizni azonosságot
         if (selectedCards[0].icon === selectedCards[1].icon) {
@@ -55,9 +51,9 @@ const flipCard = () => {
             console.log("A két kártya nem azonos.");
             setTimeout(() => {
                 console.log("visszafordit");
-                playerData.player.selectedCards = [];
                 cardList.Cards[selectedCards[0].id].isVisible = false;
                 cardList.Cards[selectedCards[1].id].isVisible = false;
+                playerData.player.selectedCards = [];
             }, 1200);
             //hozzáad 1 pontot
             player.score++;

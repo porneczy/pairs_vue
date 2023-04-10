@@ -4,7 +4,7 @@ import Card from "./components/Card/Card.vue";
 import { useCardListStore } from "./stores/player";
 
 interface Card {
-    icon: string;
+    icon: string | undefined;
     isVisible: boolean;
     isMatched: boolean;
     id: number;
@@ -25,7 +25,6 @@ const shuffledCardList = shuffleCards(cardList.Cards);
         <Card
             v-for="(card, index) in shuffledCardList"
             :key="index"
-            :isVisible="card.isVisible"
             :icon="card.icon"
             :id="card.id"
         />

@@ -11,19 +11,13 @@ interface Card {
 }
 
 const cardList = useCardListStore();
-
-function shuffleCards(cards: Card[]): Card[] {
-    return cards.sort(() => Math.random() - 0.5);
-}
-
-const shuffledCardList = shuffleCards(cardList.Cards);
 </script>
 
 <template>
     <AppHeader />
     <div class="game-board-container">
         <Card
-            v-for="(card, index) in shuffledCardList"
+            v-for="(card, index) in cardList.Cards"
             :key="index"
             :icon="card.icon"
             :id="card.id"

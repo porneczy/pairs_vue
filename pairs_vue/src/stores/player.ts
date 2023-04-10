@@ -9,7 +9,7 @@ const cardList = Array.from({ length: NUMBER_OF_CARDS }, (_, i) => ({
     isVisible: false,
     isMatched: false,
     id: idCounter++,
-}));
+})).sort(() => Math.random() - 0.5);
 
 export const usePlayerStore = defineStore("player", {
     state: (): PlayerStore => ({

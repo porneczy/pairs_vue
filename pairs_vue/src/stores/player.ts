@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import type { CardListStore, PlayerStore } from "../types/types";
 
-const NUMBER_OF_CARDS = 8;
+const NUMBER_OF_CARDS = 20; //only even number
 let idCounter = 0;
 
 const cardList = Array.from({ length: NUMBER_OF_CARDS }, (_, i) => ({

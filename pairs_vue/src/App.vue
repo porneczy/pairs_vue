@@ -3,13 +3,6 @@ import AppHeader from "./components/AppHeader/AppHeader.vue";
 import Card from "./components/Card/Card.vue";
 import { useCardListStore } from "./stores/player";
 
-interface Card {
-    icon: string | undefined;
-    isVisible: boolean;
-    isMatched: boolean;
-    id: number;
-}
-
 const cardList = useCardListStore();
 </script>
 

@@ -21,43 +21,59 @@ const flipCard = () => {
     const { selectedCards, score } = player;
     const actualCard = cardList.Cards[id];
 
-    if (selectedCards.length === 0) {
-        selectedCards.push({ id, icon });
-        actualCard.isVisible = !actualCard.isVisible;
-    } else if (selectedCards.length === 1) {
-        selectedCards.push({ id, icon });
-        actualCard.isVisible = !actualCard.isVisible;
-
-        // Ellenőrizni azonosságot
-        if (selectedCards[0].icon === selectedCards[1].icon) {
-            console.log("A két kártya azonos.");
-
-            // Ellenőrzi, hogy ha már játkon kivul van a kártya akkor hiába nyomkodjuk nem ad további pontot
-            if (!cardList.Cards[selectedCards[0].id].isMatched) {
-                //hozzáad 1 pontot
-                player.score++;
-            }
-
-            cardList.Cards[selectedCards[0].id].isMatched = true;
-            cardList.Cards[selectedCards[1].id].isMatched = true;
-            playerData.player.selectedCards = [];
-
-            // Ellenőrizi, hogy az összes kártya felfordítva van-e
-            if (cardList.Cards.every((card) => card.isMatched)) {
-                console.log("Nyertél!");
-                //todo: ide jöhet a nyertes játéklogika
-            }
-        } else {
-            console.log("A két kártya nem azonos.");
-            setTimeout(() => {
-                console.log("visszafordit");
-                cardList.Cards[selectedCards[0].id].isVisible = false;
-                cardList.Cards[selectedCards[1].id].isVisible = false;
-                playerData.player.selectedCards = [];
-            }, 1200);
-            //hozzáad 1 pontot
+    function setScorePlusOne() {
+        if (
+            !cardList.Cards[selectedCards[0].id].isMatched &&
+            !cardList.Cards[selectedCards[1].id].isMatched
+        ) {
             player.score++;
         }
+    };
+
+    function checkAllCardsMatched() {
+        if (cardList.Cards.every((card) => card.isMatched)) {
+            console.log("Nyertél!");
+            //todo: ide jöhet a nyertes játéklogika
+        }
+    };
+
+    function checkMatches() {
+        if (selectedCards[0].icon === selectedCards[1].icon) {
+            handleMatchedCards();
+        } else {
+            handleMisMatchedCards();
+        }
+    };
+
+    function handleMatchedCards() {
+        setScorePlusOne();
+
+        cardList.Cards[selectedCards[0].id].isMatched = true;
+        cardList.Cards[selectedCards[1].id].isMatched = true;
+        playerData.player.selectedCards = [];
+
+        checkAllCardsMatched();
+    };
+
+    function handleMisMatchedCards() {
+        setTimeout(() => {
+            cardList.Cards[selectedCards[0].id].isVisible = false;
+            cardList.Cards[selectedCards[1].id].isVisible = false;
+            playerData.player.selectedCards = [];
+        }, 1200);
+        setScorePlusOne();
+    };
+
+    function addSelectedCard(id: number, icon: string | undefined) {
+        selectedCards.push({ id, icon });
+        actualCard.isVisible = !actualCard.isVisible;
+    }
+
+    if (selectedCards.length === 0) {
+        addSelectedCard(id, icon);
+    } else if (selectedCards.length === 1) {
+        addSelectedCard(id, icon);
+        checkMatches();
     } else {
         return;
     }

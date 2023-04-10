@@ -3,6 +3,7 @@ import type { CardListStore, PlayerStore } from "../types/types";
 
 const NUMBER_OF_CARDS = 8;
 let idCounter = 0;
+
 const cardList = Array.from({ length: NUMBER_OF_CARDS }, (_, i) => ({
     icon: `card${i % (NUMBER_OF_CARDS / 2)}`,
     isVisible: false,

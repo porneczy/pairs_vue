@@ -35,6 +35,13 @@ const flipCard = () => {
         // Ellenőrizni azonosságot
         if (selectedCards[0].icon === selectedCards[1].icon) {
             console.log("A két kártya azonos.");
+
+            // Ellenőrzi, hogy ha már játkon kivul van a kártya akkor hiába nyomkodjuk nem ad további pontot
+            if (!cardList.Cards[selectedCards[0].id].isMatched) {
+                //hozzáad 1 pontot
+                player.score++;
+            }
+
             cardList.Cards[selectedCards[0].id].isMatched = true;
             cardList.Cards[selectedCards[1].id].isMatched = true;
             playerData.player.selectedCards = [];
@@ -52,10 +59,9 @@ const flipCard = () => {
                 cardList.Cards[selectedCards[0].id].isVisible = false;
                 cardList.Cards[selectedCards[1].id].isVisible = false;
             }, 1200);
+            //hozzáad 1 pontot
+            player.score++;
         }
-
-        //hozzáad 1 pontot
-        player.score++;
     } else {
         return;
     }

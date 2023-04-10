@@ -27,6 +27,7 @@ const shuffledCardList = shuffleCards(cardList.Cards);
             :key="index"
             :isVisible="card.isVisible"
             :icon="card.icon"
+            :id="card.id"
         />
     </div>
 </template>

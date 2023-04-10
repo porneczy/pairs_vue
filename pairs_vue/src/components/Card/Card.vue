@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import icon from "../../helpers/svgHelper.vue";
-import { usePlayerStore } from "../../stores/player";
+import { useCardListStore, usePlayerStore } from "../../stores/player";
 
 const props = defineProps({
     isVisible: {
@@ -10,22 +9,67 @@ const props = defineProps({
     icon: {
         type: String,
     },
+    id: {
+        type: Number,
+        required: true,
+    },
 });
 
-const isVisible = ref(props.isVisible);
+const cardList = useCardListStore();
+const playerData = usePlayerStore();
 
 const flipCard = () => {
-    isVisible.value = !isVisible.value;
-};
+    const { player } = playerData;
+    const { id, icon } = props;
+    const { selectedCards, score } = player;
+    const card = cardList.Cards[id];
+    console.log(cardList.Cards);
 
-const playerData = usePlayerStore();
-const scorePlus1 = () => {
-    playerData.player.score++;
+    if (selectedCards.length === 0) {
+        selectedCards.push({ id, icon });
+        card.isVisible = !card.isVisible;
+    } else if (selectedCards.length === 1) {
+        selectedCards.push({ id, icon });
+        card.isVisible = !card.isVisible;
+
+        // Ellenőrizni azonosságot
+        if (selectedCards[0].icon === selectedCards[1].icon) {
+            console.log("A két kártya azonos.");
+            cardList.Cards[selectedCards[0].id].isMatched = true;
+            cardList.Cards[selectedCards[1].id].isMatched = true;
+            playerData.player.selectedCards = [];
+
+            // Ellenőrizi, hogy az összes kártya felfordítva van-e
+            if (cardList.Cards.every((card) => card.isMatched)) {
+                console.log("Nyertél!");
+                //todo: ide jöhet a nyertes játéklogika
+            }
+        } else {
+            console.log("A két kártya nem azonos.");
+            setTimeout(() => {
+                console.log("visszafordit");
+                playerData.player.selectedCards = [];
+                cardList.Cards[selectedCards[0].id].isVisible = false;
+                cardList.Cards[selectedCards[1].id].isVisible = false;
+            }, 1200);
+        }
+
+        //hozzáad 1 pontot
+        player.score++;
+    } else {
+        return;
+    }
 };
 </script>
 <template>
     <div class="card" @click="flipCard">
-        <div v-if="!isVisible" class="front-side" @click="scorePlus1">
+        <div
+            v-if="
+                !cardList.Cards[props.id].isMatched &&
+                !cardList.Cards[props.id].isVisible
+            "
+            class="front-side"
+        >
             <h1>?</h1>
         </div>
         <div v-else class="back-side">

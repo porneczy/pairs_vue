@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppHeader from "./components/AppHeader/AppHeader.vue";
 import Card from "./components/Card/Card.vue";
+import Modal from "./components/Modal/Modal.vue";
 import { useCardListStore } from "./stores/player";
 
 const cardList = useCardListStore();
@@ -16,6 +17,7 @@ const cardList = useCardListStore();
             :id="card.id"
         />
     </div>
+    <Modal />
 </template>
 
 <style lang="scss">

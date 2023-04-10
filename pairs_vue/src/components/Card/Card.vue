@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import icon from "../../helpers/svgHelper.vue";
 import { useCardListStore, usePlayerStore } from "../../stores/player";
+import { useModalIsVisible } from "../../stores/player";
 
 const props = defineProps({
     icon: {
@@ -14,6 +15,7 @@ const props = defineProps({
 
 const cardList = useCardListStore();
 const playerData = usePlayerStore();
+const modalIsVisible = useModalIsVisible();
 
 const flipCard = () => {
     const { player } = playerData;
@@ -32,8 +34,7 @@ const flipCard = () => {
 
     function checkAllCardsMatched() {
         if (cardList.Cards.every((card) => card.isMatched)) {
-            console.log("Nyertél!");
-            //todo: ide jöhet a nyertes játéklogika
+            modalIsVisible.isVisible = true;
         }
     }
 

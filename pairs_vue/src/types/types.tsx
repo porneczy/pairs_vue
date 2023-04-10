@@ -17,3 +17,7 @@ export type CardListStore = {
 export type PlayerStore = {
     player: Player;
 };
+
+export type ModalStore = {
+    isVisible: boolean;
+};

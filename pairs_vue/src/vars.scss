@@ -9,10 +9,11 @@ $body-color: $secondary-color;
 
 $navbar-bg: $secondary-color;
 $navbar-color: $tertiary-color;
-$navbar-button-bg: $secondary-color;
-$navbar-button-color: $tertiary-color;
-$navbar-button-border-color: $tertiary-color;
-$navbar-button-shadow-color: $tertiary-color;
+
+$restart-button-bg: $secondary-color;
+$restart-button-color: $tertiary-color;
+$restart-button-border-color: $tertiary-color;
+$restart-button-shadow-color: $tertiary-color;
 
 $card-front-bg: $secondary-color;
 $card-front-color: $tertiary-color;
@@ -22,3 +23,6 @@ $card-front-shadow-color: $tertiary-color;
 $card-back-bg: $tertiary-color;
 $card-back-border-color: $secondary-color;
 $card-back-shadow-color: $secondary-color;
+
+$modal-bg: $secondary-color;
+$modal-color: $primary-color;
